@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InfoPattaya</title>
+  <style>
+    :root {
+      --bg-top: #07131d;
+      --bg-mid: #0c1c2b;
+      --bg-bottom: #edf3f8;
+      --card: rgba(255, 255, 255, 0.12);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --text: #f7fbff;
+      --muted: rgba(247, 251, 255, 0.68);
+      --dark: #102033;
+      --dark-muted: #5b6878;
+      --gold: #d7b56d;
+      --gold-soft: #f0d8a0;
+      --shadow: 0 24px 70px rgba(4, 14, 27, 0.28);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(116, 184, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 14%, rgba(244, 197, 112, 0.14), transparent 20%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 34%, var(--bg-bottom) 34%, var(--bg-bottom) 100%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 28px 0 34px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)),
+        linear-gradient(160deg, rgba(22,38,56,0.92), rgba(8,20,31,0.96));
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(110, 185, 255, 0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(237, 196, 118, 0.18), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      font-weight: 700;
+    }
+
+    .year {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero-main {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+    }
+
+    .hero-copy p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 420px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f3d79f 0%, #d3ab61 100%);
+      color: #1d1b18;
+      box-shadow: 0 12px 30px rgba(215, 181, 109, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+    }
+
+    .visual {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .art {
+      width: min(100%, 420px);
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, #bfe7ff 0%, #8ed4ff 30%, #7ad6db 48%, #1ba8d8 72%, #147bbf 100%);
+      position: relative;
+      box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .sun {
+      position: absolute;
+      top: 42px;
+      right: 54px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff8dc, #ffd37d 55%, #f3af5e 100%);
+      box-shadow: 0 0 40px rgba(255, 207, 120, 0.45);
+    }
+
+    .island {
+      position: absolute;
+      left: 50%;
+      bottom: 96px;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 25%, #f0d090 0%, #d6a45a 65%, #b47f3d 100%);
+    }
+
+    .water {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 128px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18), transparent 18%),
+        radial-gradient(circle at 72% 42%, rgba(255,255,255,0.16), transparent 18%),
+        linear-gradient(180deg, #16a6d3 0%, #146eb5 100%);
+    }
+
+    .palm {
+      position: absolute;
+      bottom: 108px;
+      width: 100px;
+      height: 190px;
+    }
+
+    .palm.left {
+      left: 74px;
+    }
+
+    .palm.right {
+      right: 78px;
+      transform: scale(0.84);
+      transform-origin: bottom center;
+    }
+
+    .trunk {
+      position: absolute;
+      bottom: 0;
+      left: 44px;
+      width: 14px;
+      height: 120px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #7d4d2c 0%, #8c5b37 55%, #684021 100%);
+      transform: skew(-10deg);
+    }
+
+    .leaf {
+      position: absolute;
+      bottom: 102px;
+      left: 24px;
+      width: 78px;
+      height: 24px;
+      border-radius: 999px 999px 0 999px;
+      background: linear-gradient(90deg, #1d9155 0%, #2fbb69 70%, #69df8f 100%);
+      transform-origin: 10px 12px;
+    }
+
+    .leaf.l1 { transform: rotate(-58deg); }
+    .leaf.l2 { transform: rotate(-28deg); }
+    .leaf.l3 { transform: rotate(0deg); }
+    .leaf.l4 { transform: rotate(28deg); }
+    .leaf.l5 { transform: rotate(56deg); }
+
+    .viewer-section {
+      padding-bottom: 34px;
+    }
+
+    .viewer-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.88);
+      box-shadow: 0 18px 50px rgba(12, 28, 43, 0.12);
+      backdrop-filter: blur(14px);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .viewer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.4);
+      border-bottom: 1px solid rgba(16, 32, 51, 0.08);
+    }
+
+    .viewer-title {
+      color: var(--dark);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .viewer-mini-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mini-btn {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      background: #eef4fa;
+    }
+
+    .mini-btn.accent {
+      background: linear-gradient(135deg, #1fa4ff 0%, #2d6dff 100%);
+      color: #fff;
+    }
+
+    .viewer-frame {
+      width: 100%;
+      height: calc(100vh - 110px);
+      min-height: 820px;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+
+    @media (max-width: 980px) {
+      .hero-main {
+        grid-template-columns: 1fr;
+      }
+
+      .visual {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: min(100% - 20px, 1240px);
+      }
+
+      .hero {
+        padding: 10px 0 20px;
+      }
+
+      .hero-card {
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .hero-top {
+        margin-bottom: 18px;
+      }
+
+      .actions,
+      .viewer-mini-actions {
+        width: 100%;
+      }
+
+      .btn,
+      .mini-btn {
+        width: 100%;
+      }
+
+      .art {
+        width: 100%;
+      }
+
+      .viewer-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .viewer-frame {
+        min-height: 620px;
+        height: calc(100vh - 70px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-top">
+          <div class="brand">InfoPattaya</div>
+          <div class="year">2026</div>
+        </div>
+
+        <div class="hero-main">
+          <div class="hero-copy">
+            <h1>Туры<br>и экскурсии</h1>
+            <p>Актуальный каталог</p>
+
+            <div class="actions">
+              <a
+                class="btn btn-primary"
+                href="./pdfjs/web/viewer.html?file=%2Fprice.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Открыть каталог
+              </a>
+
+              <a
+                class="btn btn-secondary"
+                href="https://t.me/basalaevaan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Менеджер
+              </a>
+
+              <a
+                class="btn btn-secondary"
+                href="./price.pdf"
+                download
+              >
+                Скачать PDF
+              </a>
+            </div>
+          </div>
+
+          <div class="visual">
+            <div class="art">
+              <div class="sun"></div>
+              <div class="island"></div>
+              <div class="water"></div>
+
+              <div class="palm left">
+                <div class="trunk"></div>
+                <div class="leaf l1"></div>
+                <div class="leaf l2"></div>
+                <div class="leaf l3"></div>
+                <div class="leaf l4"></div>
+                <div class="leaf l5"></div>
+              </div>
+
+              <div class="palm right">
+                <div class="trunk"></div>
+                <div class="leaf l1"></div>
+                <div class="leaf l2"></div>
+                <div class="leaf l3"></div>
+                <div class="leaf l4"></div>
+                <div class="leaf l5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="viewer-section">
+    <div class="container">
+      <div class="viewer-card">
+        <div class="viewer-head">
+          <div class="viewer-title">Каталог</div>
+
+          <div class="viewer-mini-actions">
+            <a
+              class="mini-btn"
+              href="./pdfjs/web/viewer.html?file=%2Fprice.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Полный экран
+            </a>
+
+            <a
+              class="mini-btn accent"
+              href="https://t.me/basalaevaan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Забронировать
+            </a>
+          </div>
+        </div>
+
+        <iframe
+          class="viewer-frame"
+          src="./pdfjs/web/viewer.html?file=%2Fprice.pdf"
+          title="Каталог туров">
+        </iframe>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
