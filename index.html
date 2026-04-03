@@ -477,7 +477,7 @@
 
         <iframe
           class="viewer-frame"
-          src="./pdfjs/web/viewer.html?file=%2Fprice.pdf"
+          src="./pdfjs/web/viewer.html?file=../../price.pdf"
           title="Каталог туров"
           loading="lazy">
         </iframe>
@@ -489,7 +489,7 @@
     (function () {
       const isMobile = window.matchMedia("(max-width: 900px)").matches;
       const mobileHref = "./price.pdf";
-      const desktopHref = "./pdfjs/web/viewer.html?file=%2Fprice.pdf";
+      const desktopHref = "./pdfjs/web/viewer.html?file=../../price.pdf";
 
       document.querySelectorAll("[data-open-catalog]").forEach((link) => {
         link.href = isMobile ? mobileHref : desktopHref;
